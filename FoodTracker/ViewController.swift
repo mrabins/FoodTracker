@@ -15,6 +15,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var searchController:UISearchController!
     
+    var suggestedSearchFoods: [String] = []
+    var filteredSuggestedSearchFoods:[String] = []
+    
+    var scopeButtonTitles = ["Recommended", "Search Results", "Saved"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -23,6 +29,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.hidesNavigationBarDuringPresentation = true
+        
+        self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0)
+        
+        self.tableView.tableHeaderView = self.searchController.searchBar
+        
+        self.searchController.searchBar.scopeButtonTitles = scopeButtonTitles
+        self.searchController.searchBar.delegate = self
+        
+        self.definesPresentationContext = true
+        
+        self.suggestedSearchFoods = ["apple", "bagel", "banana", "beer", "bread", "carrots", "cheddar cheese", "chicken breast", "chili with beans", "chocolate chip cookie", "coffee", "cola", "corn", "eeg", "graham crackers", "granola bars", "green beans", "ground beed paty", "hot dog", "ice cream", "jelly doughnut" , "ketchup", "milk", "mixed nuts", "mustard" , "oatmail", "orange juice", "peanut butter", "pizza", "pork chop", "potatop", "potato chips", "pretzels", "rasins", "ranch salad dressing", "red wine", "rice", "salsa", "shrimp", "spaghetti", "spaghetti sauce", "tuna", "white wine", "yellow cake"]
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +52,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Mark -  TableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        
+        if self.searchController.active {
+            return self.filteredSuggestedSearchFoods.count
+        }
+        else {
+            return self.suggestedSearchFoods.count
+        }
+        
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -44,7 +71,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         
+        let searchString = self.searchController.searchBar.text
+        let selectedScopeButtonIndex = self.searchController.searchBar.selectedScopeButtonIndex
+        self.filterContentForSearch(searchString, scope: selectedScopeButtonIndex)
+        self.tableView.reloadData()
         
+        
+    }
+    
+    func filterContentForSearch (searchText: String, scope: Int) {
+        self.filteredSuggestedSearchFoods = self.suggestedSearchFoods.filter({ (food : String) -> Bool in
+            var foodMatch = food.rangeOfString(searchText)
+            return foodMatch != nil
+            
+        })
     }
 
 }
