@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1320DAAD1BCA2D4D00EA5FBD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1320DAAC1BCA2D4D00EA5FBD /* DetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		13CF18881BCA2C9B000439AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CF18871BCA2C9B000439AD /* AppDelegate.swift */; };
 		13CF188B1BCA2C9B000439AD /* FoodTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13CF18891BCA2C9B000439AD /* FoodTracker.xcdatamodeld */; };
 		13CF188D1BCA2C9B000439AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CF188C1BCA2C9B000439AD /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1320DAAC1BCA2D4D00EA5FBD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		13CF18821BCA2C9B000439AD /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13CF18861BCA2C9B000439AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13CF18871BCA2C9B000439AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			children = (
 				13CF18871BCA2C9B000439AD /* AppDelegate.swift */,
 				13CF188C1BCA2C9B000439AD /* ViewController.swift */,
+				1320DAAC1BCA2D4D00EA5FBD /* DetailViewController.swift */,
 				13CF188E1BCA2C9B000439AD /* Main.storyboard */,
 				13CF18911BCA2C9B000439AD /* Images.xcassets */,
 				13CF18931BCA2C9B000439AD /* LaunchScreen.xib */,
@@ -159,6 +162,7 @@
 		13CF187A1BCA2C9B000439AD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = self.swift;
 				TargetAttributes = {
@@ -218,6 +222,7 @@
 				13CF188D1BCA2C9B000439AD /* ViewController.swift in Sources */,
 				13CF188B1BCA2C9B000439AD /* FoodTracker.xcdatamodeld in Sources */,
 				13CF18881BCA2C9B000439AD /* AppDelegate.swift in Sources */,
+				1320DAAD1BCA2D4D00EA5FBD /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +416,7 @@
 				13CF18A61BCA2C9B000439AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		13CF18A71BCA2C9B000439AD /* Build configuration list for PBXNativeTarget "FoodTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +425,7 @@
 				13CF18A91BCA2C9B000439AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
