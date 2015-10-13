@@ -13,6 +13,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     
+    let kAppId = "763f56ba"
+    let kAppKey = "73ceffabe1e312bb850604303e07eaf7"
+    
     var searchController:UISearchController!
     
     var suggestedSearchFoods: [String] = []
@@ -98,12 +101,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func makeRequest (seachString : String) {
-        let url = NSURL(string: "https://api.nutritionix.com/v1_1/search/\(seachString)?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=763f56ba&appKey=73ceffabe1e312bb850604303e07eaf7")
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
-            var stringData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println(stringData)
-            println(response)
-            
+        
+        // HTTP Get Request
+        
+//        let url = NSURL(string: "https://api.nutritionix.com/v1_1/search/\(seachString)?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=\(kAppId)&appKey=\(kAppKey)")
+//        let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
+//            var stringData = NSString(data: data, encoding: NSUTF8StringEncoding)
+//            println(stringData)
+//            println(response)
+        
     })
     task.resume()
 
