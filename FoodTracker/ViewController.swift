@@ -86,6 +86,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         })
     }
+    
+    func markRequest (seachString : String) {
+        let url = NSURL(string: "https://api.nutritionix.com/v1_1/search/\(seachString)?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=763f56ba&appKey=73ceffabe1e312bb850604303e07eaf7")
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
+            println(data)
+            println(response)
+            
+    })
+    task.resume()
 
 }
 
