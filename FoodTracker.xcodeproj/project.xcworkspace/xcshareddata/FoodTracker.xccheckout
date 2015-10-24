@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>44B80F335202876EE2B998B58359B7559DC2449D</key>
-		<string>github.com:mrabins/FoodTracker.git</string>
+		<string>https://github.com/mrabins/FoodTracker.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FoodTracker.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:mrabins/FoodTracker.git</string>
+	<string>https://github.com/mrabins/FoodTracker.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

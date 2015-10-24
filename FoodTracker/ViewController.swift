@@ -42,7 +42,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.definesPresentationContext = true
         
-        self.suggestedSearchFoods = ["apple", "bagel", "banana", "beer", "bread", "carrots", "cheddar cheese", "chicken breast", "chili with beans", "chocolate chip cookie", "coffee", "cola", "corn", "eeg", "graham crackers", "granola bars", "green beans", "ground beed paty", "hot dog", "ice cream", "jelly doughnut" , "ketchup", "milk", "mixed nuts", "mustard" , "oatmail", "orange juice", "peanut butter", "pizza", "pork chop", "potatop", "potato chips", "pretzels", "rasins", "ranch salad dressing", "red wine", "rice", "salsa", "shrimp", "spaghetti", "spaghetti sauce", "tuna", "white wine", "yellow cake"]
+        self.suggestedSearchFoods = ["apple", "bagel", "banana", "beer", "bread", "carrots", "cheddar cheese", "chicken breast", "chili with beans", "chocolate chip cookie", "coffee", "cola", "corn", "eeg", "graham crackers", "granola bars", "green beans", "ground beed paty", "hot dog", "ice cream", "jelly doughnut", "ketchup", "milk", "mixed nuts", "mustard" , "oatmail", "orange juice", "peanut butter", "pizza", "pork chop", "potatop", "potato chips", "pretzels", "rasins", "ranch salad dressing", "red wine", "rice", "salsa", "shrimp", "spaghetti", "spaghetti sauce", "tuna", "white wine", "yellow cake"]
         
         
     }
@@ -100,18 +100,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     
-    func makeRequest (seachString : String) {
+    func makeRequest (searchString : String) {
         
         // HTTP Get Request
-        
-//        let url = NSURL(string: "https://api.nutritionix.com/v1_1/search/\(seachString)?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=\(kAppId)&appKey=\(kAppKey)")
+//        
+//        let url = NSURL(string: "https://api.nutritionix.com/v1_1/search/\(searchString)?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=\(kAppId)&appKey=\(kAppKey)")
 //        let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
 //            var stringData = NSString(data: data, encoding: NSUTF8StringEncoding)
 //            println(stringData)
 //            println(response)
+//        })
+//        task.resume()
         
-    })
-    task.resume()
+        var request = NSMutableURLRequest (URL: NSURL(string: "https://api.nutritionix.com/v1_1/search/")!)
+        let session = NSURLSession.sharedSession()
+        request.HTTPMethod = "POST"
+        
+        var params = [
+            "appId" : kAppId,
+            "appKey" : kAppKey,
+            "fields" : ["item_name", "brand_name", "keywords", "usda_fields"],
+            "limit" : "50",
+            "query" : searchString,
+            "filters" : ["exists" : ["usda_fields": true]]]
+            
+            var error: NSError?
+            request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error)
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
 
+    }
 }
-
