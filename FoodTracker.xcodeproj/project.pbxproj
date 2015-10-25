@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1320DAAD1BCA2D4D00EA5FBD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1320DAAC1BCA2D4D00EA5FBD /* DetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		1320DAAD1BCA2D4D00EA5FBD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1320DAAC1BCA2D4D00EA5FBD /* DetailViewController.swift */; };
+		134820501BDC307E00A81007 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1348204F1BDC307E00A81007 /* DataController.swift */; };
 		13CF18881BCA2C9B000439AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CF18871BCA2C9B000439AD /* AppDelegate.swift */; };
 		13CF188B1BCA2C9B000439AD /* FoodTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13CF18891BCA2C9B000439AD /* FoodTracker.xcdatamodeld */; };
 		13CF188D1BCA2C9B000439AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CF188C1BCA2C9B000439AD /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		1320DAAC1BCA2D4D00EA5FBD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1348204F1BDC307E00A81007 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		13CF18821BCA2C9B000439AD /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13CF18861BCA2C9B000439AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13CF18871BCA2C9B000439AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			children = (
 				13CF18871BCA2C9B000439AD /* AppDelegate.swift */,
 				13CF188C1BCA2C9B000439AD /* ViewController.swift */,
+				1348204F1BDC307E00A81007 /* DataController.swift */,
 				1320DAAC1BCA2D4D00EA5FBD /* DetailViewController.swift */,
 				13CF188E1BCA2C9B000439AD /* Main.storyboard */,
 				13CF18911BCA2C9B000439AD /* Images.xcassets */,
@@ -219,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				134820501BDC307E00A81007 /* DataController.swift in Sources */,
 				13CF188D1BCA2C9B000439AD /* ViewController.swift in Sources */,
 				13CF188B1BCA2C9B000439AD /* FoodTracker.xcdatamodeld in Sources */,
 				13CF18881BCA2C9B000439AD /* AppDelegate.swift in Sources */,

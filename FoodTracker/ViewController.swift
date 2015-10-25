@@ -128,7 +128,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error)
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
-            
+        
+        
+    var task = session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
+        
+        var stringData = NSString(data: data, encoding: NSUTF8StringEncoding)
+        println(stringData)
+        
+        var conversionError: NSError?
+        var jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableLeaves, error: &error) as? NSDictionary
+        println(jsonDictionary)
+    })
+        task.resume()
 
     }
 }
