@@ -81,7 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier("Cell") as! UITableViewCell
+        let cell = tableView.dequeueReusableHeaderFooterViewWithIdentifier("Cell") as UITableViewCell
     
         var foodName: String
         
@@ -105,6 +105,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         return cell
         
+    }
+    
+    
+    // Mark - UITableViewDelete
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedScopeButtonIndex = self.searchController.searchBar.selectedScopeButtonIndex
+        if selectedScopeButtonIndex == 0 {
+            var searchFoodName:String
+            if self.searchController.active {
+                searchFoodName = filteredSuggestedSearchFoods [indexPath.row]
+            }
+            else {
+                searchFoodName = suggestedSearchFoods[indexPath.row]
+            }
+            self.searchController.searchBar.selectedScopeButtonIndex = 1
+            makeRequest(searchFoodName)
+        }
+        else if selectedScopeButtonIndex == 1 {
+            
+        }
+        else if selectedScopeButtonIndex == 2 {
+            
+        }
     }
 
     // Mark - UISearchResultsUpdating
