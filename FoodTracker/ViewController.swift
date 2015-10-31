@@ -108,7 +108,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    // Mark - UITableViewDelete
+    // Mark - UITableViewDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedScopeButtonIndex = self.searchController.searchBar.selectedScopeButtonIndex
@@ -156,7 +156,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.searchController.searchBar.selectedScopeButtonIndex = 1
         makeRequest(searchBar.text)
-        
+    }
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        self.tableView.reloadData ()
     }
     
     func makeRequest (searchString : String) {
