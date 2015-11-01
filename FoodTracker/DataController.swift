@@ -18,15 +18,15 @@ class DataController {
         var searchResult: (name: String, idValue: String)
         
         if json ["hits"] != nil {
-            let results: [AnyObject] = json ["hits"]! as! [AnyObject]
+            let results: [AnyObject] = json ["hits"]! as [AnyObject]
             
             for itemDictionary in results {
                 if itemDictionary["_id"] != nil {
                     if itemDictionary["fields"] != nil {
-                        let fieldsDictionary = itemDictionary ["fields"] as! NSDictionary
+                        let fieldsDictionary = itemDictionary ["fields"] as NSDictionary
                         if fieldsDictionary ["item_name"] != nil {
-                            let idValue:String = itemDictionary["_id"]! as! String
-                            let name: String = fieldsDictionary ["item_name"]!as! String
+                            let idValue:String = itemDictionary["_id"]! as String
+                            let name: String = fieldsDictionary ["item_name"]!as String
                             searchResult = (name: name, idValue: idValue)
                             usdaItemsSearchResults += [searchResult]
                         }
@@ -35,6 +35,74 @@ class DataController {
             }
         }
         return usdaItemsSearchResults
-        
+    }
+    
+    func saveUSDAItemForId (idValue: String, json: NSDictionary) {
+        if json ["hits"] != nil {
+            let results: [AnyObject] = json ["hits"]! as [AnyObject]
+            for itemDictionary in results {
+                if itemDictionary["_id"] != nil && itemDictionary["_id"] as String == idValue {
+                    let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+                    var requestForUSDAItem = NSFetchRequest(entityName: "USDAItem")
+                    let itemDictionaryId = itemDictionary["_id"]! as String
+                    let predicate = NSPredicate(format: "idValue == %@", itemDictionaryId)
+                                    requestForUSDAItem.predicate = predicate
+                    var error: NSError?
+                    var items = managedObjectContext?.executeFetchRequest(requestForUSDAItem, error: &error)
+                    
+                    
+/*                    Alternate means of handling this if don't need all the items returned
+                   var count - managedObjectContext?.countForFetchRequest(requestForUSDAItem, error: &error)
+*/
+                    
+                    if items?.count != 0 {
+                        // The item is already saved
+                        return
+                    }
+                    else {
+                        println("Let's save this to CoraData!")
+                        
+                        let entityDescription = NSEntityDescription.entityForName("USDAItem", inManagedObjectContext: managedObjectContext!)
+                        let usdaItem = USDAItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
+                        usdaItem.idValue = itemDictionary["_id"]! as String
+                        usdaItem.dateAdded = NSDate ()
+                        
+                        if itemDictionary["fields"] != nil {
+                            let fieldsDictionary = itemDictionary["fields"]! as NSDictionary
+                            if fieldsDictionary["item_name"] != nil {
+                                usdaItem.name = fieldsDictionary["item_name"]! as String
+                                
+                        
+                                if fieldsDictionary ["usda_fields"] != nil {
+                                    let usdaFieldsDictionary = fieldsDictionary["usda_fields"]! as NSDictionary
+                                    if usdaFieldsDictionary["CA"] != nil {
+                                        let calciumDictionary = usdaFieldsDictionary["CA"]! as NSDictionary
+                                        let calciumValue: AnyObject = calciumDictionary ["value"]!
+                                        usdaItem.calcuim = "\(calciumValue)"
+                                    }
+                                    else {
+                                        usdaItem.calcuim = "0"
+                                    }
+                                    if usdaFieldsDictionary["CHOCDF"] != nil {
+                                        let carbohydrateDictionary = usdaFieldsDictionary["CHOCDF"]! as NSDictionary
+                                        if carbohydrateDictionary["value"] != nil {
+                                            let carbohydrateValue: AnyObject = carbohydrateDictionary ["value"]!
+                                            usdaItem.carbohydrate = "\(carbohydrateValue)"
+                                        }
+                                    }
+                                    else {
+                                        usdaItem.carbohydrate = "0"
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                    
+                    
+                }
+                
+            }
+        }
     }
 }
