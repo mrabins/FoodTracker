@@ -24,13 +24,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var apiSearchForFoods: [(name: String, idValue: String)] = []
     
+    var favoritedUSDAItems:[USDAItem] = []
+    var filteredFavoritedUSDAItems: [USDAItem] = []
+    
     var scopeButtonTitles = ["Recommended", "Search Results", "Saved"]
     
     var jsonResponse: NSDictionary!
     
     var dataController = DataController()
     
-    var favoritedUSDAItems:[USDAItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return self.apiSearchForFoods.count
         }
         else {
-            return 0
+            return self.favoritedUSDAItems.count
         }
         
     }
@@ -103,7 +105,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         }
         else {
-            foodName = ""
+            foodName = self.favoritedUSDAItems[indexPath.row].name
         }
         cell.textLabel?.text = foodName
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -150,11 +152,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func filterContentForSearch (searchText: String, scope: Int) {
-        self.filteredSuggestedSearchFoods = self.suggestedSearchFoods.filter({ (food : String) -> Bool in
-            var foodMatch = food.rangeOfString(searchText)
-            return foodMatch != nil
+        if scope == 0 {
+            self.filteredSuggestedSearchFoods = self.suggestedSearchFoods.filter({ (food : String) -> Bool in
+                var foodMatch = food.rangeOfString(searchText)
+                return foodMatch != nil
+                
+            })
             
-        })
+        }
+        else if scope == 2 {
+            self.filteredFavoritedUSDAItems = self.favoritedUSDAItems.filter({ (item: USDAItem) -> Bool in
+                var stringMatch = item.name.rangeOfString(searchText)
+                return stringMatch != nil
+            })
+            
+        }
+
     }
     
     // Mark - UISearchBarDelegate
@@ -165,6 +178,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        if selectedScope == 2 {
+            requestFavoritedUSDAItems()
+        }
         self.tableView.reloadData ()
     }
     
