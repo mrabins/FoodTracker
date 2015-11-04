@@ -57,6 +57,7 @@ class DataController {
                     
                     if items?.count != 0 {
                         // The item is already saved
+                        println("The Item was already saved")
                         return
                     }
                     else {
@@ -161,6 +162,7 @@ class DataController {
                                     }
                                     (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
                                 }
+                                
                             }
                             
                         }
