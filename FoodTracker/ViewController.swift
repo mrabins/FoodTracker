@@ -80,7 +80,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return self.apiSearchForFoods.count
         }
         else {
-            return self.favoritedUSDAItems.count
+            if self.searchController.active {
+                return self.filteredFavoritedUSDAItems.count
+            }
+            else {
+                return self.favoritedUSDAItems.count
+            }
         }
         
     }
@@ -97,15 +102,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 foodName = filteredSuggestedSearchFoods[indexPath.row]
             }
             else {
-                foodName = filteredSuggestedSearchFoods[indexPath.row]
+                foodName = suggestedSearchFoods[indexPath.row]
             }
         }
         else if selectedScopeButtonIndex == 1 {
             foodName = apiSearchForFoods[indexPath.row].name
-            
         }
         else {
-            foodName = self.favoritedUSDAItems[indexPath.row].name
+            if self.searchController.active {
+                foodName = self.filteredFavoritedUSDAItems[indexPath.row].name
+            }
+            else {
+                foodName = self.favoritedUSDAItems[indexPath.row].name
+
+            }
         }
         cell.textLabel?.text = foodName
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
