@@ -53,8 +53,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.definesPresentationContext = true
         
         self.suggestedSearchFoods = ["apple", "bagel", "banana", "beer", "bread", "carrots", "cheddar cheese", "chicken breast", "chili with beans", "chocolate chip cookie", "coffee", "cola", "corn", "eeg", "graham crackers", "granola bars", "green beans", "ground beed paty", "hot dog", "ice cream", "jelly doughnut", "ketchup", "milk", "mixed nuts", "mustard" , "oatmail", "orange juice", "peanut butter", "pizza", "pork chop", "potatop", "potato chips", "pretzels", "rasins", "ranch salad dressing", "red wine", "rice", "salsa", "shrimp", "spaghetti", "spaghetti sauce", "tuna", "white wine", "yellow cake"]
-        
-        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toDetailVCSegue" {
+            if sender != nil {
+                var detailVC = segue.destinationViewController as DetailViewController
+                detailVC.usdaItem = sender as? USDAItem
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -140,6 +147,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             makeRequest(searchFoodName)
         }
         else if selectedScopeButtonIndex == 1 {
+            self.performSegueWithIdentifier("toDetailVCSegue", sender: nil)
             let idValue = apiSearchForFoods[indexPath.row].idValue
             self.dataController.saveUSDAItemForId(idValue, json: self.jsonResponse)
             
