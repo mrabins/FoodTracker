@@ -145,6 +145,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         }
         else if selectedScopeButtonIndex == 2 {
+            if self.searchController.active {
+                let usdaItem = filteredFavoritedUSDAItems[indexPath.row]
+                self.performSegueWithIdentifier("toDetailVCSegue", sender: usdaItem)
+            }
+            else {
+                let usdaitem = favoritedUSDAItems[indexPath.row]
+                self.performSegueWithIdentifier("toDetailVCSegue", sender: usdaitem)
+
+            }
             
         }
     }
