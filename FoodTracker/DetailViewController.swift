@@ -117,9 +117,16 @@ class DetailViewController: UIViewController {
         itemAttributedString.appendAttributedString(proteinTitleString)
         itemAttributedString.appendAttributedString(proteinBodyString)
         
+        let sugarTitleString = NSAttributedString(string: "Sugar", attributes: styleFirstWordAttributesDictionary)
+        let sugarBodyString = NSAttributedString(string: "\(usdaItem.sugar)% \n", attributes: style1AttributesDictionary)
+        itemAttributedString.appendAttributedString(sugarTitleString)
+        itemAttributedString.appendAttributedString(sugarBodyString)
         
+        let vitaminCTitleString = NSAttributedString(string: "Vitamin C", attributes: styleFirstWordAttributesDictionary)
+        let vitaminCBodyString = NSAttributedString(string: "\(usdaItem.vitaminC)% \n", attributes: style2AttributesDictionary)
+        itemAttributedString.appendAttributedString(vitaminCTitleString)
+        itemAttributedString.appendAttributedString(vitaminCBodyString)
         
-                
         return itemAttributedString
     }
 }
