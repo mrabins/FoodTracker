@@ -13,7 +13,7 @@ import CoreData
 @objc(USDAItem)
 class USDAItem: NSManagedObject {
 
-    @NSManaged var calcuim: String
+    @NSManaged var calcium: String
     @NSManaged var carbohydrate: String
     @NSManaged var cholesterol: String
     @NSManaged var dateAdded: NSDate

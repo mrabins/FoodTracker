@@ -81,7 +81,7 @@ class DataController {
                                     if usdaFieldsDictionary["CA"] != nil {
                                         let calciumDictionary = usdaFieldsDictionary["CA"]! as NSDictionary
                                         let calciumValue: AnyObject = calciumDictionary ["value"]!
-                                        usdaItem.calcuim = "\(calciumValue)"
+                                        usdaItem.calcium = "\(calciumValue)"
                                     }
                                     else {
                                         usdaItem.calcuim = "0"
