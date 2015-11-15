@@ -53,6 +53,7 @@ class DetailViewController: UIViewController {
     }
 
     @IBAction func eatItButtonPressed(sender: UIBarButtonItem) {
+        saveFoodItem(self.usdaItem!)
         
     }
     
@@ -198,10 +199,18 @@ class DetailViewController: UIViewController {
             
             let cholesterolUnit = HKQuantity(unit: HKUnit.gramUnitWithMetricPrefix(HKMetricPrefix.Milli), doubleValue: (foodItem.cholesterol as NSString).doubleValue)
             let cholesterol = HKQuantitySample(type: HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCholesterol), quantity: cholesterolUnit, startDate: timeFoodWasEntered, endDate: timeFoodWasEntered)
-
-                
-        
             
+            let foodDataSet = NSSet(array: [calories, calcium, carbohydrate, cholesterol, fatTotal, protein, sugar, vitaminC])
+            let foodCoorelation = HKCorrelation(type: HKCorrelationType.correlationTypeForIdentifier(HKCorrelationTypeIdentifierFood), startDate: timeFoodWasEntered, endDate: timeFoodWasEntered, objects: foodDataSet, metadata : foodMetaData)
+            var store:HealthStoreConstant = HealthStoreConstant()
+            store.healthStore?.saveObject(foodCoorelation, withCompletion: { (success, error) -> Void in
+                if success {
+                    println("saved sucessfully")
+                }
+                else {
+                    println("Error Occured: \(error)")
+                }
+            })
             
         }
     }
