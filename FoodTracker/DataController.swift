@@ -84,7 +84,7 @@ class DataController {
                                         usdaItem.calcium = "\(calciumValue)"
                                     }
                                     else {
-                                        usdaItem.calcuim = "0"
+                                        usdaItem.calcium = "0"
                                     }
                                     if usdaFieldsDictionary["CHOCDF"] != nil {
                                         let carbohydrateDictionary = usdaFieldsDictionary["CHOCDF"]! as NSDictionary
